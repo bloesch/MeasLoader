@@ -1,0 +1,3 @@
+<launch>
+	<node pkg="MeasLoader" type="MeasLoader" name="MeasLoader" output="screen" cwd="node"></node>
+</launch>
