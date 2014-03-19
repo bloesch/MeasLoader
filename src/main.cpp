@@ -25,7 +25,7 @@ int main (int argc, char **argv)
 
 	// Preparing stuff for file handling
 	std::ifstream infile;
-	infile.open ("data/measdata.dat", ifstream::in);
+	infile.open ("data/measdata1.dat", ifstream::in);
 	std::string line;
 	std::istringstream tokens;
 	std::string token;
@@ -57,6 +57,7 @@ int main (int argc, char **argv)
 	sensor_msgs::JointState encMsg;
 	std::vector<std::string> encMsg_name(12,"");
 	std::vector<double> encMsg_pos(12,0);
+	std::vector<double> encMsg_vel(12,0);
 	std::vector<double> encMsg_cf(12,0);
 	encMsg_name[0] = "LF_HAA";
 	encMsg_name[1] = "LF_HFE";
@@ -114,6 +115,11 @@ int main (int argc, char **argv)
 					encMsg_pos[i] = std::atof(token.c_str());
 			}
 			encMsg.position = encMsg_pos;
+			for(int i=0;i<12;i++){
+					std::getline(tokens, token, '\t');
+					encMsg_vel[i] = std::atof(token.c_str());
+			}
+			encMsg.velocity = encMsg_vel;
 
 			// Read contacts
 			for(int i=0;i<4;i++){
